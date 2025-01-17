@@ -1,0 +1,112 @@
+*{
+    font-family: 'Kufam';
+}
+header{
+    background-color: white;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 5px black;
+    z-index: 10000;
+    height: 50px;
+}
+h5{
+    margin-left: 20px;
+}
+h2{
+    margin-right: 20px;
+    cursor: pointer;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-color: beige;
+    background-image: url(back.jpg);
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+#click-to-search{
+    cursor: pointer;
+    margin-left: 10px;
+    border: none;
+    border-radius: 50px;
+    margin: 10px;
+}
+#click-to-search > img{
+    width: 40px;
+    height: 40px;
+}
+#click-to-search:hover{
+    background-color: rgb(146, 146, 223);
+}
+main{
+    position: relative;
+    top: 50px;
+    width: 70%;
+    background-color: white;
+    box-shadow: 0 0 5px black;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.content{
+    width: 90%;
+    padding: 10px;
+    box-shadow: 0 0 5px black;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 5px;
+}
+h3{
+    flex: 2;
+}
+.icons{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.icon{
+    border: none;
+    cursor: pointer;
+    margin-left: 30px;
+    background-color: transparent;
+}
+.icon img{
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+}
+.audio{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    box-shadow: 0 0 5px black;
+
+
+}
+.active-quran {
+    background-color: rgb(83, 200, 114);
+}
+.active-tafssir{
+    background-color: rgb(83, 200, 114);
+}
+@media(max-width: 600px){
+    main{
+        width: 90%;
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "id": "index.html",
+    "name": "الاستماع إلى الحزب 60 من القرآن الكريم والمختصر من تفسير الطبري",
+    "short_name": "الحزب 60 (رواية ورش)",
+    "start_url": "index.html",
+    "theme_color": "#4287f5",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "icons": [
+      {
+        "src": "quran192 (2).png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "quran (1).png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="manifest" href="manifest.json">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400..900;1,400..900&family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400..900;1,400..900&family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>القرآن الكريم ( حزب 60 - ورش)</title>
+</head>
+<body>
+    <header>
+        <h2 onclick="speakText(this)">القرآن الكريم </h2>
+        <button id="click-to-search"><img src="microphone.png" alt=""></button>
+    </header>
+
+    <main>
+       <h1>جاري تحميل السور ...</h1>
+    </main>
+    <audio class="audio" id="audio-player" controls>
+        <source src="" type="audio/ogg">
+        <source src="" type="audio/mpeg">
+      Your browser does not support the audio element.
+      </audio>
+    <script src="index.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
