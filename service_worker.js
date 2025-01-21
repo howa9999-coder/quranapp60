@@ -7,9 +7,7 @@ const urlsToCache = [
   "quran192 (2).png",
   "main.js",
   "style.css",
-  "back.jpg",
-  "audio.png",
-  "idea.png"
+  "back.jpg"
 ];
 
 // Install service worker and cache resources
