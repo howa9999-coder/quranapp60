@@ -16,8 +16,8 @@ function getSurah() {
                     <div class="content">
                         <h3 onclick="speakText(this)" >  ${surah.name}</h3>
                         <div class="icons">
-                            <button class="icon quran" data="${surah.id}"><img src="audio.png" alt=""></button>
-                            <button class="icon tafssir" data="${surah.id}"><img src="idea.png" alt=""></button>
+                            <button class="icon quran" data="${surah.id}"><i class="fa-solid fa-volume-high"></i></button>
+                            <button class="icon tafssir" data="${surah.id}"><i class="fa-regular fa-lightbulb"></i></button>
                         </div>
                     </div>
                 `;
@@ -150,79 +150,75 @@ document.querySelector('#click-to-search').addEventListener('click', function ()
     }
 });
 
-    
-     function searchResult(word) {
-               const main = document.querySelector('main');
+            function searchResult(word) {
+                const main = document.querySelector('main');
                 const loader = document.querySelector('.loader'); // Add a loader element in your HTML
-                     // Show the loader before making the API call
-                loader.style.display = 'block';
+                loader.style.display = 'block'; // Show the loader before making the API call
                 main.innerHTML = '';
-        axios.get(`https://mp3quran.net/api/v3/suwar`)
-            .then(function (response) {
-                                    loader.style.display = 'none'; // Hide the loader once the data is fetched
+                
+                axios.get(`https://mp3quran.net/api/v3/suwar`)
+                    .then(function (response) {
+                        loader.style.display = 'none'; // Hide the loader once the data is fetched
                         
                         const suwar = response.data.suwar;
                         const surahs = suwar.slice(-28); // Get the last 28 surahs
-            
+                        
                         let hasExactMatch = false;
-              /*  const main = document.querySelector('main');
-                main.innerHTML = '';
-                const suwar = response.data.suwar;
-    
-                // Get the last 28 surahs
-                const surahs = suwar.slice(-28);*/
-    
-                surahs.forEach((surah) => {
-    
-                    // Adjust the similarity threshold as needed (e.g., 0.7 for 70% similarity)
-                    let hasExactMatch = false;
-
-                    // Check for exact match first
-                    surahs.forEach((surah) => {
-                        if (surah.name == word) {
-                            main.innerHTML = `
+                        let hasSimilarMatch = false;
+            
+                        // Check for exact match first
+                        surahs.forEach((surah) => {
+                            if (surah.name === word) {
+                                main.innerHTML = `
                             <div class="content">
-                                <h3 onclick="speakText(this)"> ${surah.name}</h3>
+                                <h3 onclick="speakText(this)" >  ${surah.name}</h3>
                                 <div class="icons">
-                                    <button class="icon quran" data="${surah.id}"><img src="audio.png" alt="Play Audio"></button>
-                                    <button class="icon tafssir" data="${surah.id}"><img src="idea.png" alt="View Tafsir"></button>
+                                    <button class="icon quran" data="${surah.id}"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button class="icon tafssir" data="${surah.id}"><i class="fa-regular fa-lightbulb"></i></button>
                                 </div>
                             </div>
-                        `;
-                            hasExactMatch = true;
-                        }
-                    });
-
-                    // If no exact match, show similar results
-                     if (!hasExactMatch) {
-                        surahs.forEach((surah) => {
-                            const similarity = calculateSimilarity(surah.name, word);
-                            if (similarity > 0.7) {
-                                main.innerHTML = `
-                                <div class="content">
-                                    <h3 onclick="speakText(this)"> ${surah.name}</h3>
-                                    <div class="icons">
-                                        <button class="icon quran" data="${surah.id}"><img src="audio.png" alt="Play Audio"></button>
-                                        <button class="icon tafssir" data="${surah.id}"><img src="idea.png" alt="View Tafsir"></button>
-                                    </div>
-                                </div>
-                            `;
+                                `;
+                                hasExactMatch = true;
                             }
                         });
-                    } 
-                });
-    
-                const quranBtns = document.querySelectorAll('.quran');
-                const tafssirBtns = document.querySelectorAll('.tafssir');
-    
-                eventQuran(quranBtns, tafssirBtns, 'active-quran', 'active-tafssir');
-                eventTafssir(tafssirBtns, quranBtns, 'active-tafssir', 'active-quran');
-            })
-            .catch(function (error) {
-                console.error('Error fetching surah data:', error);
-            });
-    } 
-
+            
+                        // If no exact match, check for similar results
+                        if (!hasExactMatch) {
+                            surahs.forEach((surah) => {
+                                const similarity = calculateSimilarity(surah.name, word);
+                                if (similarity > 0.7) {
+                                    main.innerHTML = `
+                                <div class="content">
+                                    <h3 onclick="speakText(this)" >  ${surah.name}</h3>
+                                    <div class="icons">
+                                        <button class="icon quran" data="${surah.id}"><i class="fa-solid fa-volume-high"></i></button>
+                                        <button class="icon tafssir" data="${surah.id}"><i class="fa-regular fa-lightbulb"></i></button>
+                                    </div>
+                                </div>
+                                    `;
+                                    hasSimilarMatch = true;
+                                }
+                            });
+                        }
+            
+                        // If no results at all
+                        if (!hasExactMatch && !hasSimilarMatch) {
+                            main.innerHTML = `<p style="text-align: center; font-size: 1.2em; color: red;">لا توجد نتائج، يرجى المحاولة مرة أخرى</p>`;
+                        }
+            
+                        // Attach event listeners
+                        const quranBtns = document.querySelectorAll('.quran');
+                        const tafssirBtns = document.querySelectorAll('.tafssir');
+                        eventQuran(quranBtns, tafssirBtns, 'active-quran', 'active-tafssir');
+                        eventTafssir(tafssirBtns, quranBtns, 'active-tafssir', 'active-quran');
+                    })
+                    .catch(function (error) {
+                        loader.style.display = 'none'; // Hide the loader in case of an error
+                        console.error('Error fetching surah data:', error);
+                        main.innerHTML = `<p style="text-align: center; font-size: 1.2em; color: red;">حدث خطأ أثناء تحميل البيانات، يرجى المحاولة لاحقًا</p>`;
+                    });
+            }
+            
     
     // Calculate similarity using Levenshtein Distance
     function calculateSimilarity(str1, str2) {
