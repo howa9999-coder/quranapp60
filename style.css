@@ -72,6 +72,7 @@ main{
 }
 h3{
     flex: 2;
+    font-size: 1.5rem;
 }
 .icons{
     flex: 1;
@@ -85,11 +86,7 @@ h3{
     margin-left: 30px;
     background-color: transparent;
 }
-.icon img{
-    width: 30px;
-    height: 30px;
-    padding: 5px;
-}
+
 .audio{
     position: fixed;
     bottom: 0px;
@@ -100,12 +97,22 @@ h3{
 
 
 }
-.active-quran {
-    background-color: rgb(83, 200, 114);
+.quran{
+    font-size: 2rem;
+    color: rgb(79, 79, 237);
 }
-.active-tafssir{
-    background-color: rgb(83, 200, 114);
+.tafssir{
+    font-size: 2rem;
+    color: rgb(215, 215, 83);
 }
+.active-quran, .active-tafssir {
+    text-align: center;
+    background-color: rgb(83, 200, 114);
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 50px;
+}
+
 @media(max-width: 600px){
     main{
         width: 90%;
