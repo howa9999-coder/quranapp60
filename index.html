@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=mic" />
+
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400..900;1,400..900&family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -16,12 +18,18 @@
 <body>
     <header>
         <h2 onclick="speakText(this)">القرآن الكريم </h2>
-        <button id="click-to-search"><img src="microphone.png" alt=""></button>
+
+        <button id="click-to-search" class="mic-toggle">
+            <span class="material-symbols-outlined">
+                mic
+                </span>
     </header>
 
     <main>
        <h1>جاري تحميل السور ...</h1>
     </main>
+    <div class="loader" style="display: none;"></div>
+
     <audio class="audio" id="audio-player" controls>
         <source src="" type="audio/ogg">
         <source src="" type="audio/mpeg">
