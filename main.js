@@ -116,37 +116,61 @@ function audioPlayer(link, id){
 
 //==========================================================================Audio search
 
+
     let surah;
 
-    document.querySelector('#click-to-search').addEventListener('click', function () {
-        var speech = true;
-        window.SpeechRecognition = window.webkitSpeechRecognition;
-        const recognition = new SpeechRecognition();
-        recognition.interimResults = true;
-    
-        recognition.addEventListener('result', e => {
-            const transcript = Array.from(e.results)
-                .map(result => result[0])
-                .map(result => result.transcript)
-                .join('');
-            surah = transcript.trim();
-            searchResult(surah);
-        });
-    
-        if (speech === true) {
-            recognition.start();
-        }
+document.querySelector('#click-to-search').addEventListener('click', function () {
+    var speech = true;
+    const button = document.querySelector('#click-to-search'); // Target the button element
+    window.SpeechRecognition = window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = true;
+
+    // Add a class when recognition starts
+    recognition.addEventListener('start', () => {
+        button.classList.add('is-recording'); // Add the 'recording' class
     });
+
+    // Remove the class when recognition stops
+    recognition.addEventListener('end', () => {
+        button.classList.remove('is-recording'); // Remove the 'recording' class
+    });
+
+    recognition.addEventListener('result', e => {
+        const transcript = Array.from(e.results)
+            .map(result => result[0])
+            .map(result => result.transcript)
+            .join('');
+        surah = transcript.trim();
+        searchResult(surah);
+    });
+
+    if (speech === true) {
+        recognition.start();
+    }
+});
+
     
-    function searchResult(word) {
+     function searchResult(word) {
+               const main = document.querySelector('main');
+                const loader = document.querySelector('.loader'); // Add a loader element in your HTML
+                     // Show the loader before making the API call
+                loader.style.display = 'block';
+                main.innerHTML = '';
         axios.get(`https://mp3quran.net/api/v3/suwar`)
             .then(function (response) {
-                const main = document.querySelector('main');
+                                    loader.style.display = 'none'; // Hide the loader once the data is fetched
+                        
+                        const suwar = response.data.suwar;
+                        const surahs = suwar.slice(-28); // Get the last 28 surahs
+            
+                        let hasExactMatch = false;
+              /*  const main = document.querySelector('main');
                 main.innerHTML = '';
                 const suwar = response.data.suwar;
     
                 // Get the last 28 surahs
-                const surahs = suwar.slice(-28);
+                const surahs = suwar.slice(-28);*/
     
                 surahs.forEach((surah) => {
     
@@ -157,14 +181,14 @@ function audioPlayer(link, id){
                     surahs.forEach((surah) => {
                         if (surah.name == word) {
                             main.innerHTML = `
-                                <div class="content">
-                                    <h3 onclick="speakText(this)"> ${surah.name}</h3>
-                                    <div class="icons">
-                                        <button class="icon quran" data="${surah.id}"><img src="audio.png" alt="Play Audio"></button>
-                                        <button class="icon tafssir" data="${surah.id}"><img src="idea.png" alt="View Tafsir"></button>
-                                    </div>
+                            <div class="content">
+                                <h3 onclick="speakText(this)"> ${surah.name}</h3>
+                                <div class="icons">
+                                    <button class="icon quran" data="${surah.id}"><img src="audio.png" alt="Play Audio"></button>
+                                    <button class="icon tafssir" data="${surah.id}"><img src="idea.png" alt="View Tafsir"></button>
                                 </div>
-                            `;
+                            </div>
+                        `;
                             hasExactMatch = true;
                         }
                     });
@@ -175,14 +199,14 @@ function audioPlayer(link, id){
                             const similarity = calculateSimilarity(surah.name, word);
                             if (similarity > 0.7) {
                                 main.innerHTML = `
-                                    <div class="content">
-                                        <h3 onclick="speakText(this)"> ${surah.name}</h3>
-                                        <div class="icons">
-                                            <button class="icon quran" data="${surah.id}"><img src="audio.png" alt="Play Audio"></button>
-                                            <button class="icon tafssir" data="${surah.id}"><img src="idea.png" alt="View Tafsir"></button>
-                                        </div>
+                                <div class="content">
+                                    <h3 onclick="speakText(this)"> ${surah.name}</h3>
+                                    <div class="icons">
+                                        <button class="icon quran" data="${surah.id}"><img src="audio.png" alt="Play Audio"></button>
+                                        <button class="icon tafssir" data="${surah.id}"><img src="idea.png" alt="View Tafsir"></button>
                                     </div>
-                                `;
+                                </div>
+                            `;
                             }
                         });
                     } 
@@ -197,7 +221,8 @@ function audioPlayer(link, id){
             .catch(function (error) {
                 console.error('Error fetching surah data:', error);
             });
-    }
+    } 
+
     
     // Calculate similarity using Levenshtein Distance
     function calculateSimilarity(str1, str2) {
