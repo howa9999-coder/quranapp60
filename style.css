@@ -30,6 +30,7 @@ body{
     background-repeat: no-repeat;
     min-height: 100vh;
 }
+/*
 #click-to-search{
     cursor: pointer;
     margin-left: 10px;
@@ -43,7 +44,7 @@ body{
 }
 #click-to-search:hover{
     background-color: rgb(146, 146, 223);
-}
+}*/
 main{
     position: relative;
     top: 50px;
@@ -109,4 +110,107 @@ h3{
     main{
         width: 90%;
     }
+}
+
+.mic-toggle{
+     position: absolute;
+   /* display: block; */
+   top: 1px;
+   left: 10px;
+   border: none;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: crimson;
+    margin-bottom:  4rem;
+}
+
+
+.mic-toggle:after,
+.mic-toggle:before{
+    --pad: 0rem;
+    content: '';
+    position: absolute;
+    z-index: 0;
+    background-color: rgba(220, 20, 60, 0.2);
+    top: var(--pad);
+    left: var(--pad);
+    bottom: var(--pad);
+    right: var(--pad);
+    border-radius: 50%;
+}
+
+.mic-toggle:after{
+    transition: 0.4s;
+}
+
+.mic-toggle:before{
+    transition: 0.2s;
+}
+.mic-toggle:hover:before{
+    --pad: -1rem;
+}
+.mic-toggle:hover:after{
+    --pad: -2rem;
+}
+.mic-toggle span{
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    font-size: 2rem;
+}
+.mic-toggle img{
+    width: 60px;
+    height: 60px;
+}
+.mic-toggle.is-recording:after{
+    animation: smoothPadAfter 0.6s ease-in alternate-reverse forwards infinite;
+}
+.mic-toggle.is-recording:before{
+    animation: smoothPadBefore 0.6s ease-in alternate-reverse forwards infinite;
+}
+@keyframes smoothPadAfter{
+    0%{
+        top: -2rem;
+        left: -2rem;
+        bottom: -2rem;
+        right: -2rem;
+    }
+    100%{
+        top: -1rem;
+        left: -1rem;
+        bottom: -1rem;
+        right: -1rem;
+    }
+}
+@keyframes smoothPadBefore{
+    0%{
+        top: -1rem;
+        left: -1rem;
+        bottom: -1rem;
+        right: -1rem;
+    }
+    100%{
+        top: -2rem;
+        left: -2rem;
+        bottom: -2rem;
+        right: -2rem;
+    }
+}
+
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light gray */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+    text-align: center;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
