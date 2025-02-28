@@ -1,4 +1,4 @@
-const cacheName = "app-cache-v2"; // Update version when you add/remove assets
+const cacheName = "quran60-app-cache-v2"; // Update version when you add/remove assets
 
 const assets = [
     "index.html",
