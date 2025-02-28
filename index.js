@@ -1,19 +1,32 @@
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("service_worker.js").then((registration) => {
-      console.log("Service Worker Registered");
-  
-      // Listen for updates
-      registration.onupdatefound = () => {
-        const newWorker = registration.installing;
-        newWorker.onstatechange = () => {
-          if (newWorker.state === "installed") {
-            if (navigator.serviceWorker.controller) {
-              // New update available
-              alert("A new version is available. Please refresh the page.");
-            }
+if(navigator.serviceWorker){
+  navigator.serviceWorker.register('serviceWorker.js')
+  .then((reg)=> {
+      console.log("file is register", reg)
+  })
+  .catch((err)=>{
+      console.log("error", err)
+  })
+}
+
+
+//INSATALL BUTTON
+const inst = document.querySelector('#install');
+window.addEventListener("beforeinstallprompt", (installEvent)=>{
+  installEvent.preventDefault;
+  inst.style.display ='block';
+  deferredPromt = installEvent;
+} )
+inst.addEventListener("click", ()=>{
+  if(deferredPromt){
+      deferredPromt.prompt();
+      deferredPromt.userChoice.then((choiceResult=>{
+          if(choiceResult.outcome === 'accepted'){
+              console.log("user accepted installing");
+              inst.style.display = "none";
+          }else{
+              console.log("user refused installing")
           }
-        };
-      };
-    });
+      }))
   }
+}) 
   
