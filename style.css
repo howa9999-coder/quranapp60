@@ -1,6 +1,16 @@
 *{
     font-family: 'Kufam';
 }
+body{
+    margin: 0;
+    padding: 0;
+    background-color: beige;
+    background-image: url(back.jpg);
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
 header{
     background-color: white;
     position: fixed;
@@ -12,39 +22,31 @@ header{
     box-shadow: 0 0 5px black;
     z-index: 10000;
     height: 50px;
+
+}
+.title-and-install{
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+
+}
+#install{
+    background-color: rgb(84, 198, 84);
+    border: none;
+    border-radius: 50%;
+    margin: 10px;
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    z-index: 10000000000;
 }
 h5{
     margin-left: 20px;
 }
 h2{
-    margin-right: 20px;
     cursor: pointer;
 }
-body{
-    margin: 0;
-    padding: 0;
-    background-color: beige;
-    background-image: url(back.jpg);
-    background-size: cover;
-    background-position: center; 
-    background-repeat: no-repeat;
-    min-height: 100vh;
-}
-/*
-#click-to-search{
-    cursor: pointer;
-    margin-left: 10px;
-    border: none;
-    border-radius: 50px;
-    margin: 10px;
-}
-#click-to-search > img{
-    width: 40px;
-    height: 40px;
-}
-#click-to-search:hover{
-    background-color: rgb(146, 146, 223);
-}*/
+
 main{
     position: relative;
     top: 50px;
