@@ -1,5 +1,5 @@
 if(navigator.serviceWorker){
-  navigator.serviceWorker.register('serviceWorker.js')
+  navigator.serviceWorker.register('service_worker.js')
   .then((reg)=> {
       console.log("file is register", reg)
   })
