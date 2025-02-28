@@ -1,6 +1,18 @@
 
 //==========================================================================Get suwar function
 function getSurah() {
+    if (!navigator.onLine) {
+        console.log("عذرًا، يبدو أنه لا يوجد اتصال بالإنترنت في الوقت الحالي."
+);
+        // Display cached data or a fallback message
+        const main = document.querySelector('main');
+        main.innerHTML = `
+        <div class="content">  <h3>عذرًا، يبدو أنه لا يوجد اتصال بالإنترنت في الوقت الحالي.</h3> </div>
+        `
+;
+        return;
+    }
+
     axios.get(`https://mp3quran.net/api/v3/suwar`)
         .then(function (response) {
             const main = document.querySelector('main');
@@ -11,7 +23,6 @@ function getSurah() {
             const surah = suwar.slice(-28).reverse();
 
             surah.forEach((surah) => {
-
                 main.innerHTML += `
                     <div class="content">
                         <h3 onclick="speakText(this)" >  ${surah.name}</h3>
@@ -22,10 +33,11 @@ function getSurah() {
                     </div>
                 `;
             });
-            const quranBtns = document.querySelectorAll('.quran')
-            const tafssirBtns = document.querySelectorAll('.tafssir')
-            eventQuran( quranBtns, tafssirBtns, 'active-quran', 'active-tafssir'  )
-            eventTafssir(tafssirBtns, quranBtns, 'active-tafssir', 'active-quran' )
+
+            const quranBtns = document.querySelectorAll('.quran');
+            const tafssirBtns = document.querySelectorAll('.tafssir');
+            eventQuran(quranBtns, tafssirBtns, 'active-quran', 'active-tafssir');
+            eventTafssir(tafssirBtns, quranBtns, 'active-tafssir', 'active-quran');
         })
         .catch(function (error) {
             console.error('Error fetching surah data:', error);
